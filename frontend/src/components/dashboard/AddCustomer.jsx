@@ -32,7 +32,7 @@ const AddCustomer = () => {
       
 
       const response = await axios.post(
-        "http://localhost:5000/api/customer/add",
+        "https://classic-tailor-shop-front.onrender.com/api/customer/add",
         customer,
         {
           headers: {
