@@ -3,6 +3,7 @@ import AboutContent from "../sections/AboutContent";
 import ServiceContent from "../sections/ServicesContent";
 import GalleryContent from "../sections/GalleryContent";
 import ContactContent from "../sections/ContactContent";
+import TrackOrder from "../sections/TrackOrder";
 
 export default function Home()
 {
@@ -27,6 +28,10 @@ export default function Home()
 
        <section id="contact" className="min-h-screen flex items-center justify-center bg-blue-50">
         <ContactContent />
+      </section>
+
+      <section id="trackorder" className="min-h-screen flex items-center justify-center bg-blue-50">
+        <TrackOrder />
       </section>
 
 

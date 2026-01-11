@@ -7,6 +7,8 @@ import connectToDatabase from "./db/db.js";
 import authRouter from "./routes/auth.js";
 import customerRouter from "./routes/CustomerRoutes.js";
 import measurementRouter from "./routes/measurementRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+
 
 dotenv.config();
 
@@ -27,8 +29,9 @@ app.use(express.json());
 // Mount auth routes at /api/auth
 app.use('/api/auth', authRouter);
 app.use('/api/customer', customerRouter );
-//app.use('/api/employee', employeeRouter)
 app.use('/api/measurements', measurementRouter);
+app.use('/api',orderRoutes);
+
 
 // Simple health endpoint to verify server reachability
 app.get('/ping', (req, res) => {

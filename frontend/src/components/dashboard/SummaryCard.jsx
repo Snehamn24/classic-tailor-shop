@@ -2,33 +2,49 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const SummaryCard = ({ text }) => {
+const SummaryCard = ({ text, type }) => {
   const [number, setNumber] = useState(0);
   const navigate = useNavigate();
 
   const token =
     localStorage.getItem("token") || sessionStorage.getItem("token");
 
-  // Fetch total customers from backend
-  const fetchTotalCustomers = async () => {
+  const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/customer", {
+      let url = "";
+
+      if (type === "customers") {
+        url = "http://localhost:5000/api/customer";
+      } else if (type === "orders") {
+        url = "http://localhost:5000/api/orders";
+      }
+
+      const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
       if (response.data.success) {
-        setNumber(response.data.customers.length);
+        if (type === "customers") {
+          setNumber(response.data.customers.length);
+        } else if (type === "orders") {
+          setNumber(response.data.orders.length);
+        }
       }
     } catch (err) {
-      console.error("Failed to fetch customers:", err);
+      console.error("Failed to fetch data:", err);
     }
   };
 
   useEffect(() => {
-    fetchTotalCustomers();
+    fetchData();
   }, []);
 
   const handleClick = () => {
-    navigate("/admin-dashboard/customerlist"); // Redirect to CustomerList page
+    if (type === "customers") {
+      navigate("/admin-dashboard/customerlist");
+    } else if (type === "orders") {
+      navigate("/admin-dashboard/orderlist");
+    }
   };
 
   return (

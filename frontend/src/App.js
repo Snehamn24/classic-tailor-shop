@@ -11,6 +11,7 @@ import CustomerList from "./components/dashboard/CustomerList";
 import UpdateCustomer from "./components/dashboard/UpdateCustomer";
 import CustomerMeasurements from "./components/dashboard/CustomerMeasurements";
 import AddOrderPage from "./components/dashboard/AddOrders";
+import OrderList from "./components/dashboard/OrderList";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
 />
 
   <Route path="customer/:id/measurements" element={<CustomerMeasurements />} />
+  <Route path="orderlist" element={<OrderList />}/>
 
       </Route>
 

@@ -7,14 +7,14 @@ export default function AddOrderPage() {
   const [customers, setCustomers] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const [deliveryDate, setDeliveryDate] = useState("");
+  
 
   const [order, setOrder] = useState({
     shirt: 0,
     pant: 0,
     pyjama: 0,
     blazer: 0,
-    deliveryDate:0,
+    deliveryDate:"",
     status: "Not Stitched",
   });
 
@@ -66,7 +66,7 @@ export default function AddOrderPage() {
       if (res.data.success) {
         alert("Order created successfully");
         setSelectedCustomer(null);
-        setOrder({ shirt: 0, pant: 0, pyjama: 0, blazer: 0, status: "Not Stitched" });
+        setOrder({ shirt: 0, pant: 0, status: "Not Stitched" });
         navigate("/admin-dashboard/orders");
       }
     } catch (err) {
@@ -122,7 +122,7 @@ export default function AddOrderPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {['shirt', 'pant', 'pyjama', 'blazer'].map((item) => (
+            {['shirt', 'pant'].map((item) => (
               <div key={item} className="flex items-center justify-between border p-4 rounded-lg">
                 <span className="capitalize font-medium">{item}</span>
                 <div className="flex items-center gap-3">
@@ -153,8 +153,8 @@ export default function AddOrderPage() {
   </label>
   <input
     type="date"
-    value={deliveryDate}
-    onChange={(e) => setDeliveryDate(e.target.value)}
+    value={order.deliveryDate}
+    onChange={(e) => setOrder({ ...order, deliveryDate: e.target.value })}
     className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
     required
   />

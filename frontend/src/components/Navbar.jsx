@@ -55,6 +55,14 @@ export default function Navbar() {
               Contact
             </ScrollLink>
           </li>
+
+          <li>
+            <ScrollLink to="trackorder" smooth duration={300}
+            onClick={() => goAndScroll("trackorder")}
+            className="cursor-pointer hover:text-blue-600">
+              Track Order
+            </ScrollLink>
+          </li>
           <li>
             <RouterLink to="/login" className="text-blue-600 hover:underline">
               Login
