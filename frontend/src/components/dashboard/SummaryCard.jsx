@@ -14,7 +14,7 @@ const SummaryCard = ({ text, type }) => {
       let url = "";
 
       if (type === "customers") {
-        url = "http://localhost:5000/api/customer";
+        url = "https://classic-tailor-shop-backend.onrender.com/api/customer";
       } else if (type === "orders") {
         url = "http://localhost:5000/api/orders";
       }
