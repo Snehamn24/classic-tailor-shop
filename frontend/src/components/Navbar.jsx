@@ -15,9 +15,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-blue-600">Classic tailor shop</h1>
+        <h1 className="text-3xl font-bold text-blue-600 non-italic">Classic Tailor</h1>
 
         <ul className="flex gap-6 text-gray-700 font-medium">
           <li>

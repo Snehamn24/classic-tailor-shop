@@ -4,34 +4,40 @@ import ServiceContent from "../sections/ServicesContent";
 import GalleryContent from "../sections/GalleryContent";
 import ContactContent from "../sections/ContactContent";
 import TrackOrder from "../sections/TrackOrder";
+import Footer from "../sections/Footer";
 
 export default function Home()
 {
     return(
-        <div className="space-y-32">
+        <div className="flex flex-col min-h-screen">
 
-        <section id="home" className="min-h-screen flex items-center justify-center bg-blue-50">
+        <section id="home" className="h-screen flex items-center justify-center bg-blue-50">
             <HomeContent />
         </section>
 
-         <section id="about" className="min-h-screen flex items-center justify-center bg-blue-50">
+         <section id="about" className="h-screen flex items-center justify-center bg-blue-50">
         <AboutContent />
       </section>
 
-         <section id="service" className="min-h-screen flex items-center justify-center bg-blue-50">
+         <section id="service" className="h-screen flex items-center justify-center bg-blue-50">
         <ServiceContent />
       </section>
 
-       <section id="gallery" className="min-h-screen flex items-center justify-center bg-blue-50">
+       <section id="gallery" className="h-screen flex items-center justify-center bg-blue-50">
         <GalleryContent/>
       </section>
 
-       <section id="contact" className="min-h-screen flex items-center justify-center bg-blue-50">
+       <section id="contact" className="h-screen flex items-center justify-center bg-blue-50">
         <ContactContent />
       </section>
 
-      <section id="trackorder" className="min-h-screen flex items-center justify-center bg-blue-50">
+      <section id="trackorder" className="h-screen flex items-center justify-center bg-blue-50">
         <TrackOrder />
+      </section>
+
+
+      <section id="footer" className="bg-blue-50">
+        <Footer />
       </section>
 
 
