@@ -18,7 +18,7 @@ const UpdateCustomer = () => {
   // Fetch customer details on page load
   const fetchCustomer = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/customer/${id}`, {
+      const response = await axios.get(`https://classic-tailor-shop-front.onrender.com/api/customer/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.success) {
@@ -44,7 +44,7 @@ const UpdateCustomer = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/customer/${id}`,
+        `https://classic-tailor-shop-front.onrender.com/api/customer/${id}`,
         customer,
         { headers: { Authorization: `Bearer ${token}` } }
       );

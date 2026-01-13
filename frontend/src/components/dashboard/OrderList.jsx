@@ -4,14 +4,14 @@ import axios from "axios";
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All"); // ✅ FIX ADDED
+  const [statusFilter, setStatusFilter] = useState("All"); 
 
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
   // Fetch Orders
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/orders", {
+      const res = await axios.get("https://classic-tailor-shop-front.onrender.com/api/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -51,7 +51,7 @@ const OrderList = () => {
   const updateOrder = async (id, data) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/orders/${id}`,
+        `https://classic-tailor-shop-front.onrender.com/api/orders/${id}`,
         data,
         {
           headers: { Authorization: `Bearer ${token}` },

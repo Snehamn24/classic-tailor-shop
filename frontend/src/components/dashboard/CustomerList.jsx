@@ -11,7 +11,7 @@ const CustomerList = () => {
 
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/customer", {
+      const res = await axios.get("https://classic-tailor-shop-front.onrender.com/api/customer", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data.success) setCustomers(res.data.customers);
@@ -44,7 +44,7 @@ const CustomerList = () => {
     }
 
     try {
-      const res = await axios.delete(`http://localhost:5000/api/customer/${id}`, {
+      const res = await axios.delete(`https://classic-tailor-shop-front.onrender.com/api/customer/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

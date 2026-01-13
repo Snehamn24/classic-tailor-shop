@@ -16,7 +16,7 @@ const SummaryCard = ({ text, type }) => {
       if (type === "customers") {
         url = "https://classic-tailor-shop-backend.onrender.com/api/customer";
       } else if (type === "orders") {
-        url = "http://localhost:5000/api/orders";
+        url = "https://classic-tailor-shop-front.onrender.com/api/orders";
       }
 
       const response = await axios.get(url, {

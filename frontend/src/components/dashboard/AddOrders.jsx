@@ -27,7 +27,7 @@ export default function AddOrderPage() {
 
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/customer", {
+      const res = await axios.get("https://classic-tailor-shop-front.onrender.com/api/customer", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data.success) setCustomers(res.data.customers);
