@@ -44,7 +44,7 @@ const UpdateCustomer = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `https://classic-tailor-shop-front.onrender.com/api/customer/${id}`,
+        `https://classic-tailor-shop-backend.onrender.com/api/customer/${id}`,
         customer,
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -32,7 +32,7 @@ const CustomerMeasurements = () => {
     const fetchData = async () => {
       try {
         // Fetch customer info
-        const customerRes = await axios.get(`https://classic-tailor-shop-front.onrender.com/api/customer/${id}`, {
+        const customerRes = await axios.get(`https://classic-tailor-shop-backend.onrender.com/api/customer/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -42,7 +42,7 @@ const CustomerMeasurements = () => {
 
         // Fetch existing measurements
         try {
-          const measurementsRes = await axios.get(`https://classic-tailor-shop-front.onrender.com/api/measurements/${id}`, {
+          const measurementsRes = await axios.get(`https://classic-tailor-shop-backend.onrender.com/api/measurements/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           
@@ -77,7 +77,7 @@ const CustomerMeasurements = () => {
 
     try {
       const response = await axios.post(
-        `https://classic-tailor-shop-front.onrender.com/api/measurements/${id}`,
+        `https://classic-tailor-shop-backend.onrender.com/api/measurements/${id}`,
         measurements,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -101,7 +101,7 @@ const CustomerMeasurements = () => {
 
     try {
       const response = await axios.delete(
-        `https://classic-tailor-shop-front.onrender.com/api/measurements/${id}`,
+        `https://classic-tailor-shop-backend.onrender.com/api/measurements/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

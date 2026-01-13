@@ -32,7 +32,7 @@ const AddCustomer = () => {
       
 
       const response = await axios.post(
-        "https://classic-tailor-shop-front.onrender.com/api/customer/add",
+        "https://classic-tailor-shop-backend.onrender.com/api/customer/add",
         customer,
         {
           headers: {

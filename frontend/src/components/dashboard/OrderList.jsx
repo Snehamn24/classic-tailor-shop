@@ -11,7 +11,7 @@ const OrderList = () => {
   // Fetch Orders
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("https://classic-tailor-shop-front.onrender.com/api/orders", {
+      const res = await axios.get("https://classic-tailor-shop-backend.onrender.com/api/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

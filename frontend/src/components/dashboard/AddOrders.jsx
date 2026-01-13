@@ -27,7 +27,7 @@ export default function AddOrderPage() {
 
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get("https://classic-tailor-shop-front.onrender.com/api/customer", {
+      const res = await axios.get("https://classic-tailor-shop-backend.onrender.com/api/customer", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data.success) setCustomers(res.data.customers);
@@ -59,7 +59,7 @@ export default function AddOrderPage() {
         ...order,
       };
 
-      const res = await axios.post("http://localhost:5000/api/orders", payload, {
+      const res = await axios.post("https://classic-tailor-shop-backend.onrender.com/api/orders", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
