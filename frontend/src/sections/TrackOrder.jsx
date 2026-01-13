@@ -14,7 +14,7 @@ const TrackOrder = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/orders/track/${phone}`
+        `https://classic-tailor-shop-backend.onrender.com/api/orders/track/${phone}`
       );
 
       if (res.data.success) {

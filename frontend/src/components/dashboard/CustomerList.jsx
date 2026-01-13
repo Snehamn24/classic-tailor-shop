@@ -20,6 +20,8 @@ const CustomerList = () => {
     }
   };
 
+
+  
   useEffect(() => {
     fetchCustomers();
   }, []);
