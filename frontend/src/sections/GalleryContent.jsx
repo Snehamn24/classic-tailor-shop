@@ -1,15 +1,40 @@
-export default function GalleryContent(){
-    return(
-        <div className="text-center max-w-wl">
+import shop from "../assets/shop.jpeg";
+import shirts from "../assets/shirts.jpeg";
+import pant from "../assets/pant.jpeg";
 
-        <h2 className="text-4xl font-bold text-blue-600 mb-4">
-        Welcome to Gallery
+export default function GalleryContent() {
+  return (
+    <div className="text-center max-w-6xl mx-auto px-4">
+      <h2 className="text-4xl font-bold text-blue-600 mb-8">
+        Our Gallery
       </h2>
-      <p className="text-gray-600">
-        This is a Single Page Application built using React and Tailwind CSS.
-      </p>
-
+    
+      {/* Images */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="overflow-hidden rounded-lg shadow-lg">
+          <img
+            src={shop}  // replace with your image path
+            alt="Gallery 1"
+            className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+          />
         </div>
 
-    );
+        <div className="overflow-hidden rounded-lg shadow-lg">
+          <img
+            src={shirts}
+            alt="Gallery 2"
+            className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+
+        <div className="overflow-hidden rounded-lg shadow-lg">
+          <img
+            src={pant}
+            alt="Gallery 3"
+            className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
