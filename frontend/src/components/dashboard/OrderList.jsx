@@ -47,11 +47,17 @@ const OrderList = () => {
   );
 
 
+// Count of orders by status
+const notStitchedCount = orders.filter(order => order.status === "Not Stitched").length;
+const inProgressCount = orders.filter(order => order.status === "In Progress").length;
+
+
+
   // Update Order Status or Payment
   const updateOrder = async (id, data) => {
     try {
       const res = await axios.put(
-        `https://classic-tailor-shop-front.onrender.com/api/orders/${id}`,
+        `https://classic-tailor-shop-backend.onrender.com/api/orders/${id}`,
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -80,6 +86,20 @@ const OrderList = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Order List</h2>
+
+      {/* 🔢 Summary Counts */}
+<div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div className="bg-white shadow rounded-lg p-4 text-center">
+    <h3 className="text-lg font-semibold text-slate-700">Not Stitched</h3>
+    <p className="text-2xl font-bold text-red-500">{notStitchedCount}</p>
+  </div>
+
+  <div className="bg-white shadow rounded-lg p-4 text-center">
+    <h3 className="text-lg font-semibold text-slate-700">In Progress</h3>
+    <p className="text-2xl font-bold text-yellow-500">{inProgressCount}</p>
+  </div>
+</div>
+
 
       {/* Search Customer */}
       <div className="mb-6 flex items-center gap-3">

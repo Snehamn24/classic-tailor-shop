@@ -6,7 +6,7 @@ export default function Footer()
         <footer className="bg-blue-800 text-white py-48 w-full">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
                 <p className="text-sm mb-4 md:mb-0">
-                © Classic Tailor Shop. All rights reserved.
+                &copy; Classic Tailor Shop. All rights reserved.
         </p>
 
         <div className="flex gap-4">
@@ -14,7 +14,7 @@ export default function Footer()
             to="home"
             smooth={true}
             duration={300}
-            className="cursor-pointer hover:text-blue-300"
+            className="cursor-pointer hover:text-orange-500"
             >Home</ScrollLink>
 
 
@@ -22,20 +22,20 @@ export default function Footer()
             to="about"
             smooth={true}
             duration={300}
-            className="cursor-pointer hover:text-blue-300">About Us</ScrollLink>
+            className="cursor-pointer hover:text-orange-500">About Us</ScrollLink>
 
             <ScrollLink 
             to="service"
             smooth={true}
             duration={300}
-            className="cursor-pointer hover:text-blue-300"
+            className="cursor-pointer hover:text-orange-500"
             >Service</ScrollLink>
 
             <ScrollLink 
             to="gallery"
             smooth={true}
             duration={300}
-            className="cursor-pointer hover:text-blue-300"
+            className="cursor-pointer hover:text-orange-500"
             >Gallery</ScrollLink>
 
 
@@ -43,7 +43,7 @@ export default function Footer()
             to="contact"
             smooth={true}
             duration={300}
-            className="cursor-pointer hover:text-blue-300"
+            className="cursor-pointer hover:text-orange-500"
             >Contact Us</ScrollLink>
 
 
@@ -52,7 +52,7 @@ export default function Footer()
             to="trackorder"
             smooth={true}
             duration={300}
-            className="cursor-pointer hover:text-blue-300"
+            className="cursor-pointer hover:text-orange-500"
             >Track Order</ScrollLink>
 
 

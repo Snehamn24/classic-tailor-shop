@@ -7,7 +7,7 @@ export default function Navbar() {
 
   const goAndScroll = (id) => {
     if (location.pathname !== "/") {
-      navigate("/");
+      navigate("/");	
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }, 200);

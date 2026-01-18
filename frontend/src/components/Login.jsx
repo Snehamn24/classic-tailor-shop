@@ -1,117 +1,153 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { clearAuth } from '../utils/auth';
-//import AdminDashboard from './AdminDashboard';
+import Navbar from './Navbar';
 
 const Login = () => {
-    const [email,setEmail] = useState("");//setEmail is a method to update email state
-    const [password,setPassword] = useState("");
-    const [error,setError]=useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-    const [loading, setLoading] = useState(false);
-    const [rememberMe, setRememberMe] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-      // When landing on the login page, clear any existing auth tokens.
-      // This prevents a user from navigating Back/Forward into a protected page
-      // using a previously-stored token without an explicit fresh login.
-      clearAuth();
-    }, []);
+  useEffect(() => {
+    clearAuth();
+  }, []);
 
-    const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const response = await axios.post(
-      "https://classic-tailor-shop-backend.onrender.com/api/auth/login",
-      { email, password },
-      { timeout: 5000 }
-    );
-    console.log('Login response:', response);
+    try {
+      const response = await axios.post(
+        "https://classic-tailor-shop-backend.onrender.com/api/auth/login",
+        { email, password },
+        { timeout: 5000 }
+      );
 
-    if (response?.data?.success) {
-      const token = response.data.token;
-      const user = response.data.user;
+      if (response?.data?.success) {
+        const token = response.data.token;
+        const user = response.data.user;
 
-      if (rememberMe) {
-        localStorage.setItem('token', token);
-        if (user) localStorage.setItem('user', JSON.stringify(user));
+        if (rememberMe) {
+          localStorage.setItem('token', token);
+          if (user) localStorage.setItem('user', JSON.stringify(user));
+        } else {
+          sessionStorage.setItem('token', token);
+          if (user) sessionStorage.setItem('user', JSON.stringify(user));
+        }
+
+        setError(null);
+        alert('Login successful! Redirecting...');
+        navigate('/admin-dashboard', { replace: true });
       } else {
-        sessionStorage.setItem('token', token);
-        if (user) sessionStorage.setItem('user', JSON.stringify(user));
+        setError(response?.data?.message || 'Login failed');
       }
-
-      setError(null);
-      // success alert
-      alert('Login successful! Redirecting...');
-
-      // redirect directly to admin dashboard
-      navigate('/admin-dashboard', { replace: true });
-    } else {
-      setError(response?.data?.message || 'Login failed');
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data?.message || `Server error ${error.response.status}`);
+      } else if (error.request) {
+        setError('No response from server. Try again later.');
+      } else {
+        setError(`Request error: ${error.message}`);
+      }
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error('Login error:', error);
-    if (error.response) {
-      setError(error.response.data?.message || `Server responded with status ${error.response.status}`);
-    } else if (error.request) {
-      setError('No response from server. Check server/CORS and try again.');
-    } else {
-      setError(`Request error: ${error.message}`);
-    }
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
-    <div
-    className='flex flex-col items-center h-screen justify-center bg-gradient-to-b from-blue-600 from-50% to-gray-100
-    to-50% space-y-6'>
-      <h2 className='text-2xl font-bold mb-4'>Login</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className='mb-4 flex items-center justify-between'>
-            <label htmlFor="email" className='block text-gray-700'>Email </label>
-            <input type='email' 
-            className='border border-gray-300 rounded-md px-4 py-2 w-full'
-            placeholder='Enter Email'
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-            required
-            />
-        </div>
-        <div className='mb-4 flex items-center justify-between'>
-            <label htmlFor="password" className='block text-gray-700'>Password</label>
-            <input type='password' className='border border-gray-300 rounded-md px-4 py-2 w-full' 
-            placeholder='Enter a Password'
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-            required
-            />
-        </div>
+    <div className="min-h-screen bg-blue-50 flex flex-col">
 
-        <div className='mb-4 flex items-center justify-between'>
-          <label className='inline-flex items-center'>
-            <input type='checkbox' className='form-checkbox' checked={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)} />
-            <span className='ml-2 text-gray-700'>Remember Me</span>
-          </label>
+      {/* ✅ Navbar at the top */}
+      <Navbar />
+
+      {/* Login card centered */}
+      <div className="flex-grow flex items-center justify-center px-4 pt-20 pb-10">
+        <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
           
-        </div>
-        <div className='mb-4'>
-        <button className='bg-teal-600 text-white px-4 py-2 rounded-md' type='submit' disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-        </div>
-      </form>
-    </div>
-  )
-}
+          {/* Title */}
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
+            Welcome Back 👋
+          </h2>
+          <p className="text-center text-gray-500 mb-6">
+            Login to access your dashboard
+          </p>
 
-export default Login
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2">
+              {error}
+            </div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email Address
+              </label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Remember Me */}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center text-sm text-gray-600">
+                <input
+                  type="checkbox"
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <span className="ml-2">Remember Me</span>
+              </label>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition duration-200 shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
+
+          {/* Footer */}
+          <p className="text-center text-sm text-gray-400 mt-6">
+            © {new Date().getFullYear()} Classic Tailor Shop
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
