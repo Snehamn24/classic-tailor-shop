@@ -1,8 +1,7 @@
 export default function AboutContent() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 text-center">
-      
-      {/* Section Title */}
+
       <h2 className="text-4xl font-extrabold text-blue-600 mb-4">
         About Classic Tailor
       </h2>
@@ -10,7 +9,7 @@ export default function AboutContent() {
         20 years of craftsmanship in N.G. Halli — where tradition meets perfect fit.
       </p>
 
-      {/* Cards */}
+    
       <div className="grid md:grid-cols-3 gap-8">
 
     
@@ -32,7 +31,7 @@ export default function AboutContent() {
           </p>
         </div>
 
-        {/* Smith Card */}
+      
         <div className="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition">
           <div className="text-4xl mb-3">✂️</div>
           <h3 className="text-xl font-semibold text-gray-800 mb-1">Latha</h3>
@@ -44,7 +43,7 @@ export default function AboutContent() {
 
       </div>
 
-      {/* Footer Line */}
+     
       <p className="mt-10 text-gray-500 text-sm">
         Crafted with care. Designed for confidence.
       </p>

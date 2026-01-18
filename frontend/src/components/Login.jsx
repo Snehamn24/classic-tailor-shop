@@ -60,13 +60,13 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
+    <div className="min-h-screen bg-blue-50 flex">
 
-      {/* ✅ Navbar at the top */}
+     
       <Navbar />
 
-      {/* Login card centered */}
-      <div className="flex-grow flex items-center justify-center px-4 pt-20 pb-10">
+     
+      <div className="flex-grow flex items-center justify-center pt-20">
         <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
           
           {/* Title */}
