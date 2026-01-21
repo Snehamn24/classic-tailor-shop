@@ -27,7 +27,7 @@ export default function Home()
         <GalleryContent/>
       </section>
 
-       <section id="contact" className="h-screen flex items-center justify-center bg-blue-50">
+       <section id="contact" className="min-h-screen flex items-center bg-blue-50">
         <ContactContent />
       </section>
 

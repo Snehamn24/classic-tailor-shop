@@ -69,7 +69,7 @@ const Login = () => {
       <div className="flex-grow flex items-center justify-center pt-20">
         <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
           
-          {/* Title */}
+        
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
             Welcome Back 👋
           </h2>
@@ -84,7 +84,7 @@ const Login = () => {
             </div>
           )}
 
-          {/* Form */}
+          
           <form onSubmit={handleSubmit} className="space-y-5">
             
             {/* Email */}
@@ -140,10 +140,7 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Footer */}
-          <p className="text-center text-sm text-gray-400 mt-6">
-            © {new Date().getFullYear()} Classic Tailor Shop
-          </p>
+          
         </div>
       </div>
     </div>

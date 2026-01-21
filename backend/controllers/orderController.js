@@ -1,111 +1,153 @@
 import Order from "../models/Order.js";
 import Customer from "../models/Customer.js";
 
-//Create new order
-//take the incoming variable values from the frontend and store it in a variable so we can use it
-export const createOrder = async(req,res)=>{
-    try{
-        const{
-            customerId,
-            shirt,
-            pant,
-            pyjama,
-            blazer,
-            deliveryDate,
-            status,
-        }=req.body
+// ===============================
+// CREATE ORDER
+// ===============================
+export const createOrder = async (req, res) => {
+  try {
+    const {
+      customerId,
+      shirt,
+      pant,
+      deliveryDate,
+      status,
+    } = req.body;
 
-        if(!customerId){
-            return res.status(400).json({success:false,error:"Customer is required"});
-        }
+    // 🔍 DEBUG (temporary but IMPORTANT)
+    console.log("Incoming Order Payload:", req.body);
 
-        if(!deliveryDate){
-            return res.status(400).json({success:false,error:"customer not found"});
-        }
-
-        //create a new order record using the values  extracted
-
-        const order = new Order({
-            customerId,
-            shirt,
-            pant,
-            pyjama,
-            blazer,
-            deliveryDate,
-            status,
-        });
-
-        await order.save();
-
-
-        res.status(201).json({
-            success:true,
-            message:"Order created Successfully",
-            order,
-        });
-    } catch(error){
-        console.error("Create order Error:",error);
-        res.status(500).json({
-            success:false,
-            error:"Server error while creating order",
-        });
+    // -------------------------------
+    // BASIC VALIDATIONS
+    // -------------------------------
+    if (!customerId) {
+      return res.status(400).json({ success: false, message: "Customer is required" });
     }
+
+    if (shirt === undefined || pant === undefined) {
+      return res.status(400).json({
+        success: false,
+        message: "Shirt and Pant quantities are required",
+      });
+    }
+
+    if (shirt < 0 || pant < 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Clothing quantities cannot be negative",
+      });
+    }
+
+    if (!deliveryDate) {
+      return res.status(400).json({
+        success: false,
+        message: "Delivery date is required",
+      });
+    }
+
+    // -------------------------------
+    // DELIVERY DATE VALIDATION
+    // -------------------------------
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const selectedDate = new Date(deliveryDate);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      return res.status(400).json({
+        success: false,
+        message: "Delivery date cannot be earlier than today",
+      });
+    }
+
+    // -------------------------------
+    // CREATE ORDER
+    // -------------------------------
+    const order = new Order({
+      customerId,
+      shirt,
+      pant,
+      deliveryDate: selectedDate,
+      status,
+    });
+
+    await order.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Order created successfully",
+      order,
+    });
+  } catch (error) {
+    console.error("Create Order Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while creating order",
+    });
+  }
 };
 
-//get all the orders
-export const getAllOrders = async (req,res) => {
-    try{
-        const orders = await Order.find()
-        .populate("customerId","name phone")
-        .sort({createdAt:-1});
+// ===============================
+// GET ALL ORDERS
+// ===============================
+export const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate("customerId", "name phone")
+      .sort({ createdAt: -1 });
 
-        res.json({success:true,orders});
-    }catch(error){
-        console.error("Fetch orders Errors:",error);
-        res.status(500).json({
-            success:false,
-            error:"Server error while fetching orders",
-        });
-    }
+    res.json({ success: true, orders });
+  } catch (error) {
+    console.error("Fetch Orders Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while fetching orders",
+    });
+  }
 };
 
-// PUT /api/orders/:id
+// ===============================
+// UPDATE ORDER (STATUS / PAYMENT)
+// ===============================
 export const updateOrder = async (req, res) => {
   try {
     const { status, paymentDone } = req.body;
 
-    
     const updateData = {};
     if (status !== undefined) updateData.status = status;
     if (paymentDone !== undefined) updateData.paymentDone = paymentDone;
 
-
-
-
-    const orders = await Order.findByIdAndUpdate(
+    const order = await Order.findByIdAndUpdate(
       req.params.id,
       updateData,
-       { new: true }
-    ).populate("customerId", "name phone"); // 🔹 Important
+      { new: true }
+    ).populate("customerId", "name phone");
 
-    if (!Order) {
-      return res.status(404).json({ success: false, error: "Order not found" });
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
     }
 
-    res.json({ success: true, orders }); // 🔹 Send `order` (singular)
-  } catch (err) {
-    console.error("Update order failed:", err);
-    res.status(500).json({ success: false, error: err.message });
+    res.json({ success: true, order });
+  } catch (error) {
+    console.error("Update Order Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while updating order",
+    });
   }
 };
 
-
-// GET /api/orders/track/:phone
+// ===============================
+// TRACK ORDERS BY PHONE
+// ===============================
 export const trackOrdersByPhone = async (req, res) => {
   try {
     const { phone } = req.params;
 
-    // 1. Find the customer using phone number
     const customer = await Customer.findOne({ phone });
 
     if (!customer) {
@@ -115,27 +157,23 @@ export const trackOrdersByPhone = async (req, res) => {
       });
     }
 
-    // 2. Find all orders for that customer
     const orders = await Order.find({ customerId: customer._id })
       .populate("customerId", "name phone")
       .sort({ createdAt: -1 });
 
-    if (!orders || orders.length === 0) {
+    if (!orders.length) {
       return res.status(404).json({
         success: false,
-        message: "No orders found for this phone number",
+        message: "No orders found for this customer",
       });
     }
 
-    res.json({
-      success: true,
-      orders,
-    });
+    res.json({ success: true, orders });
   } catch (error) {
-    console.error("Track order error:", error);
+    console.error("Track Order Error:", error);
     res.status(500).json({
       success: false,
-      message: "Server error while tracking order",
+      message: "Server error while tracking orders",
     });
   }
 };

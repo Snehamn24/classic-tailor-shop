@@ -48,6 +48,7 @@ function App() {
         <Route path="customer/:id/update" element={<UpdateCustomer />} />
         <Route path="customer/:id/measurements" element={<CustomerMeasurements />} />
         <Route path="orderlist" element={<OrderList />} />
+        <Route path="orders" element={<OrderList />}/>
       </Route>
 
     </Routes>

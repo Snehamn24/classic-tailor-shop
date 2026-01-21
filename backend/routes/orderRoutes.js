@@ -1,21 +1,33 @@
 import express from "express";
-import { createOrder,getAllOrders,updateOrder,trackOrdersByPhone } from "../controllers/orderController.js";
+import {
+  createOrder,
+  getAllOrders,
+  updateOrder,
+  trackOrdersByPhone,
+} from "../controllers/orderController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-//access by phone number should come before id
-router.get("/orders/track/:phone",trackOrdersByPhone);
+// ===============================
+// TRACK ORDERS (Public)
+// ===============================
+// Must come before /:id routes
+router.get("/orders/track/:phone", trackOrdersByPhone);
 
-//create order
-router.post("/orders",authMiddleware,createOrder);
+// ===============================
+// CREATE ORDER (Protected)
+// ===============================
+router.post("/orders", authMiddleware, createOrder);
 
-//get all orders
-router.get("/orders",authMiddleware,getAllOrders);
+// ===============================
+// GET ALL ORDERS (Protected)
+// ===============================
+router.get("/orders", authMiddleware, getAllOrders);
 
-//updation
-router.put("/orders/:id",authMiddleware,updateOrder);
-
-
+// ===============================
+// UPDATE ORDER (Protected)
+// ===============================
+router.put("/orders/:id", authMiddleware, updateOrder);
 
 export default router;

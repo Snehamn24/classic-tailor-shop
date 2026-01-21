@@ -1,31 +1,44 @@
 import mongoose from "mongoose";
-
 const orderSchema = new mongoose.Schema(
-    {
-        customerId : {
-            type : mongoose.Schema.Types.ObjectId,
-            ref: "Customer",
-            required: true,
-        },
-
-        shirts: {type:Number,default:0},
-        pant:{type:Number,default:0},
-        deliveryDate:{
-            type:Date,
-            required:true,
-        },
-        status: {
-            type:String,
-            enum:["Not Stitched","In Progress","Stitched","Delivered"],
-            default: "Not Stitched",
-        },
-        paymentDone: {
-    type: Boolean,
-    default: false,
-  },
+  {
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Customer",
+      required: true,
     },
-    {timestamps:true}
-);
 
-const Order = mongoose.model("Order",orderSchema);
+    shirt: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    pant: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    deliveryDate: {
+      type: Date,
+      required: true,
+    },
+
+    status: {
+      type: String,
+      enum: ["Not Stitched", "In Progress", "Stitched", "Delivered"],
+      default: "Not Stitched",
+    },
+
+    paymentDone: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+    strict: true, // 🔥 THIS KILLS "shirts" FOREVER
+  }
+);
+const Order = mongoose.model("Order", orderSchema);
 export default Order;
