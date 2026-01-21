@@ -1,5 +1,6 @@
 import { BsFillTelephoneForwardFill } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
+import { FaLocationDot } from "react-icons/fa6";
 
 export default function ContactContent() {
   return (
@@ -30,12 +31,13 @@ export default function ContactContent() {
             <IoMdMail />
             
             <p className="text-gray-700 text-lg font-medium">
-              classic.tailor@example.com
+              nagarajn@gmail.com
             </p>
           </div>
 
           <div className="flex items-start gap-4">
-            <span className="text-2xl">📍</span>
+           <FaLocationDot />
+
             <p className="text-gray-700 text-lg">
               Classic Tailor, Bengaluru, Karnataka
             </p>
