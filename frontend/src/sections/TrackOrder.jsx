@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { HiMiniArrowPath } from "react-icons/hi2";
 
 const TrackOrder = () => {
   const [phone, setPhone] = useState("");
@@ -27,26 +28,51 @@ const TrackOrder = () => {
     }
   };
 
+  const handleReset = () => {
+  setPhone("");
+  setOrders([]);
+  setMessage("");
+};
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">Track Your Order</h2>
+<div className="flex items-center gap-3 justify-center mb-6">
+  <input
+    type="text"
+    placeholder="Enter Your Phone Number"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    className="border px-4 py-2 rounded w-72 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
 
-      <div className="flex gap-3 justify-center mb-6">
-        <input
-          type="text"
-          placeholder="Enter Your Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="border px-4 py-2 rounded w-72"
-        />
+  <button
+    onClick={handleSearch}
+   className="
+    text-blue-600 bg-neutral-primary border border-blue-600
+    hover:bg-blue-600 hover:text-white
+    focus:ring-4 focus:ring-blue-200
+    font-medium leading-5 rounded-md text-sm px-4 py-2.5
+    transition
+  "
+     
+  >
+    Track Order
+  </button>
 
-        <button
-          onClick={handleSearch}
-          className="bg-blue-600 text-white px-5 py-2 rounded"
-        >
-          Track Order
-        </button>
-      </div>
+  {/* Refresh Button */}
+  <button
+    onClick={handleReset}
+    className="group relative p-2 rounded-full hover:bg-gray-200 transition"
+  >
+    <HiMiniArrowPath className="h-6 w-6 text-blue-600" />
+
+    <span className="absolute -top-8 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition bg-black text-white text-xs px-2 py-1 rounded">
+      Refresh
+    </span>
+  </button>
+</div>
+
 
       {/* Message */}
       {message && <p className="text-center text-red-500">{message}</p>}

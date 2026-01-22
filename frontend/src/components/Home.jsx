@@ -11,33 +11,56 @@ export default function Home()
     return(
         <div className="flex flex-col min-h-screen">
 
-        <section id="home" className="h-screen flex items-center justify-center bg-blue-50">
-            <HomeContent />
-        </section>
-
-         <section id="about" className="h-screen flex items-center justify-center bg-blue-50">
-        <AboutContent />
+        <section
+        id="home"
+        className="min-h-screen flex items-center justify-center bg-blue-50"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-screen">
+          <HomeContent />
+        </div>
       </section>
 
-         <section id="service" className="h-screen flex items-center justify-center bg-blue-50">
-        <ServiceContent />
+         {/* ABOUT */}
+      <section id="about" className="bg-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AboutContent />
+        </div>
       </section>
 
-       <section id="gallery" className="h-screen flex items-center justify-center bg-blue-50">
-        <GalleryContent/>
+      {/* SERVICES */}
+      <section id="service" className="bg-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ServiceContent />
+        </div>
       </section>
 
-       <section id="contact" className="min-h-screen flex items-center bg-blue-50">
-        <ContactContent />
+      {/* GALLERY */}
+      <section id="gallery" className="bg-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GalleryContent />
+        </div>
       </section>
 
-      <section id="trackorder" className="h-screen flex items-center justify-center bg-blue-50">
-        <TrackOrder />
+      {/* CONTACT */}
+      <section id="contact" className="bg-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ContactContent />
+        </div>
+      </section>
+
+      {/* TRACK ORDER */}
+      <section id="trackorder" className="bg-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <TrackOrder />
+        </div>
       </section>
 
 
       <section id="footer" className="bg-blue-50">
-        <Footer />
+       
+        <div className="py-16 pb-0">
+          <Footer />
+        </div>
       </section>
 
 

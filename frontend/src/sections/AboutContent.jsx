@@ -4,7 +4,7 @@ import woman_icon from "../assets/woman_icon.png";
 
 export default function ServiceContent() {
   return (
-    <div className="bg-blue-50 py-20">
+    <div className="bg-blue-50 py-15">
       <div className="text-center max-w-6xl mx-auto px-4">
         
         

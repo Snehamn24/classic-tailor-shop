@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import  scissors  from "../assets/opening.gif";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -34,11 +35,12 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-
-        {/* Logo */}
-        <h1 className="text-2xl md:text-3xl font-bold text-blue-600">
-          Classic Tailor
-        </h1>
+<div className="flex items-center gap-2">
+  <img src={scissors} className="h-10 w-10" alt="Scissors Logo" />
+  <h1 className="text-2xl md:text-3xl font-bold text-blue-600">
+    Classic Tailor
+  </h1>
+</div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-6 text-gray-700 font-medium">

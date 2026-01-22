@@ -4,21 +4,20 @@ import celebrate_icon from "../assets/celebrate.png";
 
 export default function ServiceContent() {
   return (
-    <div className="bg-blue-50 pt-32 pb-20">
-      <div className="text-center max-w-6xl mx-auto px-4">
-        
-        
+    <section className="bg-blue-50 py-10">
+      <div className="max-w-7xl mx-auto px-4 text-center">
+
+        {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-4">
           Our Services
         </h2>
-        <p className="text-gray-600 mb-14 max-w-xl mx-auto">
+        <p className="text-gray-600 mb-16 max-w-xl mx-auto">
           Premium tailoring for everyday wear and special occasions.
         </p>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          
-          {/* Card */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
+
           <ServiceCard
             icon={shirt_icon}
             title="Shirt Stitching"
@@ -39,7 +38,7 @@ export default function ServiceContent() {
 
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -48,22 +47,20 @@ function ServiceCard({ icon, title, desc }) {
   return (
     <div className="
       bg-white p-8 rounded-3xl shadow-md
+      flex flex-col items-center text-center
       transition-all duration-300
-      md:hover:shadow-2xl
-      md:hover:-translate-y-2
-      md:hover:scale-105
+      hover:shadow-2xl hover:-translate-y-2 hover:scale-105
     ">
-      <div className="flex justify-center mb-6">
-        <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center">
-          <img src={icon} className="w-20 h-20" alt={title} />
-        </div>
+
+      <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+        <img src={icon} className="w-16 h-16" alt={title} />
       </div>
 
-      <h3 className="text-xl font-semibold text-gray-800 mb-3 text-center">
+      <h3 className="text-xl font-semibold text-gray-800 mb-3">
         {title}
       </h3>
 
-      <p className="text-gray-600 text-sm leading-relaxed text-center">
+      <p className="text-gray-600 text-sm leading-relaxed">
         {desc}
       </p>
     </div>

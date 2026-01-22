@@ -1,4 +1,6 @@
 import { Link as ScrollLink } from "react-scroll";
+import { RiInstagramFill } from "react-icons/ri";
+import { MdEmail } from "react-icons/md";
 
 export default function Footer()
 {
@@ -57,6 +59,27 @@ export default function Footer()
 
 
 
+        </div>
+
+             <div className="flex gap-4 text-xl mt-4 md:mt-0">
+          {/* Instagram */}
+          <a
+            href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-orange-500"
+          >
+           <RiInstagramFill size={28} /> 
+          </a>
+
+          {/* Gmail */}
+          <a
+            href="https://mail.google.com/mail/?view=cm&to=nagarajn2166@gmail.com"
+            className="hover:text-orange-500"
+          >
+         
+            <MdEmail size={28} />
+          </a>
         </div>
 
 
