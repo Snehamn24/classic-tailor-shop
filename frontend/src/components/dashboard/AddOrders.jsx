@@ -28,6 +28,9 @@ export default function AddOrderPage() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
+  const today = new Date().toISOString().split("T")[0];
+
+
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -222,6 +225,7 @@ export default function AddOrderPage() {
         </label>
         <input
           type="date"
+          min={today}
           value={order.deliveryDate}
           onChange={(e) =>
             setOrder({ ...order, deliveryDate: e.target.value })

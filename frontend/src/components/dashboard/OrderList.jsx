@@ -75,6 +75,61 @@ const OrderList = () => {
           <h1 className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">Orders Dashboard</h1>
           <p className="text-slate-600">Track tailoring orders and manage payments</p>
         </div>
+        {/* STATUS SUMMARY CARDS */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+  {/* Not Stitched */}
+  <div className="bg-white rounded-2xl shadow-md p-6 flex items-center justify-between">
+    <div>
+      <p className="text-sm text-slate-500">Not Stitched</p>
+      <h2 className="text-3xl font-bold text-red-600">
+        {orders.filter(o => o.status === "Not Stitched").length}
+      </h2>
+    </div>
+    <div className="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center">
+      <FiFilter size={22} />
+    </div>
+  </div>
+
+  {/* In Progress */}
+  <div className="bg-white rounded-2xl shadow-md p-6 flex items-center justify-between">
+    <div>
+      <p className="text-sm text-slate-500">In Progress</p>
+      <h2 className="text-3xl font-bold text-yellow-600">
+        {orders.filter(o => o.status === "In Progress").length}
+      </h2>
+    </div>
+    <div className="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center">
+      <FiCheckCircle size={22} />
+    </div>
+  </div>
+
+  {/* Stitched */}
+  <div className="bg-white rounded-2xl shadow-md p-6 flex items-center justify-between">
+    <div>
+      <p className="text-sm text-slate-500">Stitched</p>
+      <h2 className="text-3xl font-bold text-blue-600">
+        {orders.filter(o => o.status === "Stitched").length}
+      </h2>
+    </div>
+    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">
+      <FiCheckCircle size={22} />
+    </div>
+  </div>
+
+  {/* Delivered */}
+  <div className="bg-white rounded-2xl shadow-md p-6 flex items-center justify-between">
+    <div>
+      <p className="text-sm text-slate-500">Delivered</p>
+      <h2 className="text-3xl font-bold text-green-600">
+        {orders.filter(o => o.status === "Delivered").length}
+      </h2>
+    </div>
+    <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center">
+      <FiDollarSign size={22} />
+    </div>
+  </div>
+</div>
+
 
         {/* SEARCH & FILTER */}
         <div className="bg-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row md:items-center gap-4 mb-12">
@@ -131,9 +186,18 @@ const OrderList = () => {
                     <td className="px-4 py-3 font-bold text-indigo-600">{order.pant || 0}</td>
                     <td className="px-4 py-3 text-slate-700">{new Date(order.deliveryDate).toLocaleDateString()}</td>
                     <td className="px-4 py-3">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusStyle(order.status)}`}>
-                        {order.status}
-                      </span>
+                      <select
+    value={order.status}
+    onChange={(e) =>
+      updateOrder(order._id, { status: e.target.value })
+    }
+    className={`px-3 py-2 rounded-full text-xs font-semibold border outline-none cursor-pointer ${getStatusStyle(order.status)}`}
+  >
+    <option value="Not Stitched">Not Stitched</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Stitched">Stitched</option>
+    <option value="Delivered">Delivered</option>
+  </select>
                     </td>
                     <td className="px-4 py-3">
                       <button
