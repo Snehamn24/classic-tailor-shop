@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const SummaryCard = ({ text, type }) => {
   const [number, setNumber] = useState(0);
-  const navigate = useNavigate();
 
   const token =
     localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -39,22 +37,13 @@ const SummaryCard = ({ text, type }) => {
     fetchData();
   }, []);
 
-  const handleClick = () => {
-    if (type === "customers") {
-      navigate("/admin-dashboard/customerlist");
-    } else if (type === "orders") {
-      navigate("/admin-dashboard/orderlist");
-    }
-  };
-
   return (
-    <div
-      onClick={handleClick}
-      className="bg-white shadow rounded p-4 cursor-pointer hover:shadow-lg transition"
-    >
+    <>
       <p className="text-sm text-gray-500">{text}</p>
-      <p className="text-2xl font-bold">{number}</p>
-    </div>
+      <p className="text-2xl font-bold text-blue-600 mt-1">
+        {number}
+      </p>
+    </>
   );
 };
 

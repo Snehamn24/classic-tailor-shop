@@ -59,62 +59,62 @@ const UpdateCustomer = () => {
     }
   };
 
-  if (loading) return <p>Loading customer data...</p>;
+  if (loading) return <p className="text-center py-20 text-slate-500">Loading customer data...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Update Customer</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={customer.name}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md"
-              required
-            />
-          </div>
+    <div className="min-h-screen bg-blue-50 flex items-start justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg p-10">
+        <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">Update Customer</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 gap-6">
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={customer.name}
+                onChange={handleChange}
+                className="mt-2 p-3 w-full border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none transition-all duration-200"
+                required
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Phone Number
-            </label>
-            <input
-              type="text"
-              name="phone"
-              value={customer.phone}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md"
-              required
-            />
-          </div>
+            {/* Phone */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700">Phone Number</label>
+              <input
+                type="text"
+                name="phone"
+                value={customer.phone}
+                onChange={handleChange}
+                className="mt-2 p-3 w-full border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none transition-all duration-200"
+                required
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Address
-            </label>
-            <input
-              type="text"
-              name="address"
-              value={customer.address}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md"
-            />
-          </div>
+            {/* Address */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700">Address</label>
+              <input
+                type="text"
+                name="address"
+                value={customer.address}
+                onChange={handleChange}
+                className="mt-2 p-3 w-full border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none transition-all duration-200"
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded"
-          >
-            Update Customer
-          </button>
-        </div>
-      </form>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="flex items-center justify-center gap-2 px-6 py-2 border border-blue-400 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-200 font-medium"
+>
+              Update Customer
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
