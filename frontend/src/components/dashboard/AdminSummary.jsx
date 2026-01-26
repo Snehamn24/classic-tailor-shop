@@ -154,7 +154,7 @@ const AdminSummary = () => {
     text-left"
           >
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-             <HiUsers className="text-blue-600 w-5 h-5" />
+             <GiClothes className="text-blue-600 w-5 h-5" />
           </div>
             
             <SummaryCard
