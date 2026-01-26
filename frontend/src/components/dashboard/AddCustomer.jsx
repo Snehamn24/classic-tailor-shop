@@ -45,7 +45,7 @@ const AddCustomer = () => {
 
       if (response.data.success) {
         alert("Customer added successfully!");
-        navigate("/admin-dashboard/customer");
+        navigate("/admin-dashboard/customerlist");
       }
     } catch (error) {
       alert(error.response?.data?.error || "Failed to add customer");
