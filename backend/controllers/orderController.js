@@ -43,6 +43,13 @@ export const createOrder = async (req, res) => {
         message: "Delivery date is required",
       });
     }
+    if (shirt === 0 && pant === 0) {
+  return res.status(400).json({
+    success: false,
+    message: "At least one item (Shirt or Pant) must be ordered",
+  });
+}
+
 
     // -------------------------------
     // DELIVERY DATE VALIDATION
@@ -175,3 +182,31 @@ export const trackOrdersByPhone = async (req, res) => {
     });
   }
 };
+
+// ===============================
+// DELETE ORDER
+// ===============================
+export const deleteOrder = async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Order deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete Order Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while deleting order",
+    });
+  }
+};
+

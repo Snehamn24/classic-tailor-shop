@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import {
   FiSearch,
   FiUser,
-  FiShoppingBag,
-  FiCalendar,
-  FiCheckCircle,
   FiArrowLeft,
   FiPlus,
   FiMinus,
@@ -67,6 +64,11 @@ export default function AddOrderPage() {
       return;
     }
 
+    if (order.shirt === 0 && order.pant === 0) {
+      alert("Order must contain at least one item: either a shirt or a pant.");
+      return;
+    }
+
     setLoading(true);
     try {
       await axios.post(
@@ -81,7 +83,13 @@ export default function AddOrderPage() {
       alert("Order created successfully");
       navigate("/admin-dashboard/orders");
     } catch (err) {
-      alert("Failed to create order");
+      console.error(err);
+
+      if (err.response && err.response.data && err.response.data.message) {
+        alert(err.response.data.message);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
     } finally {
       setLoading(false);
     }

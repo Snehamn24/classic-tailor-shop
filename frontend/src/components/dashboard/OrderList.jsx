@@ -55,6 +55,27 @@ const OrderList = () => {
     }
   };
 
+  const deleteOrder = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this order?")) return;
+
+    try {
+      const res = await axios.delete(
+        `https://classic-tailor-shop-backend.onrender.com/api/orders/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (res.data.success) {
+        setOrders((prev) => prev.filter((order) => order._id !== id));
+        alert("Order deleted successfully.");
+      } else {
+        console.error("Unexpected response:", res);
+        alert("Failed to delete the order. Please try again.");
+      }
+    } catch (err) {
+      console.error("Failed to delete order:", err);
+      alert("Failed to delete the order. Please try again.");
+    }
+  };
+
   const getStatusStyle = (status) => {
     // Dashboard-like soft gradient badges
     const styles = {
@@ -209,6 +230,14 @@ const OrderList = () => {
                         }`}
                       >
                         {order.paymentDone ? "Paid" : "Pending"}
+                      </button>
+                    </td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => deleteOrder(order._id)}
+                        className="px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700 hover:bg-red-200"
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>
