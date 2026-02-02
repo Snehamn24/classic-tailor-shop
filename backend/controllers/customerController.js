@@ -52,7 +52,7 @@ const getCustomers = async (req, res) => {
   }
 };
 
-// ADD THESE NEW FUNCTIONS:
+
 
 const getCustomerById = async (req, res) => {
   try {

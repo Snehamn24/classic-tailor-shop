@@ -9,9 +9,8 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// ===============================
+
 // TRACK ORDERS (Public)
-// ===============================
 // Must come before /:id routes
 router.get("/orders/track/:phone", trackOrdersByPhone);
 

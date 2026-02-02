@@ -19,19 +19,19 @@ export default function ContactContent() {
       {/* Content */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-        {/* LEFT: Contact Info */}
+      
         <div className="space-y-6">
           <div className="flex items-center gap-4">
             <BsFillTelephoneForwardFill className="text-blue-600 text-xl" />
             <p className="text-gray-700 text-lg font-medium">
-              +91 98765 43210
+              +91 7795196984
             </p>
           </div>
 
           <div className="flex items-center gap-4">
             <IoMdMail className="text-blue-600 text-xl" />
             <p className="text-gray-700 text-lg font-medium">
-              nagarajn@gmail.com
+              nagarajn2166@gmail.com
             </p>
           </div>
 
@@ -50,7 +50,6 @@ export default function ContactContent() {
                       href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-orange-500"
                     >
                      <RiInstagramFill size={28} className="text-blue-600" /> 
                     </a>

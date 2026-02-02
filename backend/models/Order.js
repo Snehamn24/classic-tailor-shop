@@ -37,7 +37,7 @@ const orderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    strict: true, // 🔥 THIS KILLS "shirts" FOREVER
+    strict: true, 
   }
 );
 const Order = mongoose.model("Order", orderSchema);

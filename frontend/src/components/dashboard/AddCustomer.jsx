@@ -24,7 +24,7 @@ const AddCustomer = () => {
     const newErrors = {};
     if (!customer.name.trim()) newErrors.name = "Name is required";
     if (!customer.phone.trim()) newErrors.phone = "Phone is required";
-    else if (!/^\d{10}$/.test(customer.phone)) newErrors.phone = "Enter valid 10-digit phone";
+    else if (!/^[6-9]\d{9}$/.test(customer.phone)) newErrors.phone = "Enter valid 10-digit phone";
     if (!customer.address.trim()) newErrors.address = "Address is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

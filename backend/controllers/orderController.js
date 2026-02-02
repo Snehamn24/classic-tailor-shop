@@ -1,9 +1,8 @@
 import Order from "../models/Order.js";
 import Customer from "../models/Customer.js";
 
-// ===============================
+
 // CREATE ORDER
-// ===============================
 export const createOrder = async (req, res) => {
   try {
     const {
@@ -14,7 +13,7 @@ export const createOrder = async (req, res) => {
       status,
     } = req.body;
 
-    // 🔍 DEBUG (temporary but IMPORTANT)
+    // DEBUG (temporary but IMPORTANT)
     console.log("Incoming Order Payload:", req.body);
 
     // -------------------------------
@@ -141,9 +140,8 @@ export const updateOrder = async (req, res) => {
   }
 };
 
-// ===============================
+
 // TRACK ORDERS BY PHONE
-// ===============================
 export const trackOrdersByPhone = async (req, res) => {
   try {
     const { phone } = req.params;

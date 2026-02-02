@@ -78,7 +78,7 @@ const CustomerList = () => {
           </p>
         </div>
 
-        {/* SEARCH & ADD */}
+        
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative w-full md:max-w-sm">
