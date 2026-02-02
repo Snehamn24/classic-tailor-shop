@@ -191,7 +191,7 @@ const OrderList = () => {
             <table className="w-full table-auto border-collapse">
               <thead>
                 <tr className="bg-blue-50">
-                  {["Customer", "Phone", "Shirt", "Pant", "Delivery", "Status", "Payment"].map((header) => (
+                  {["Customer", "Phone", "Shirt", "Pant", "Delivery", "Status", "Payment","Delete"].map((header) => (
                     <th key={header} className="text-left px-4 py-3 text-slate-700 font-medium text-sm">
                       {header}
                     </th>

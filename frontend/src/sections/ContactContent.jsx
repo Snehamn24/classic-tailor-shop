@@ -47,7 +47,7 @@ export default function ContactContent() {
           <div className="flex gap-4 text-xl mt-4 md:mt-0">
                     {/* Instagram */}
                     <a
-                      href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME"
+                      href="https://www.instagram.com/classic_mens_tailoring"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
