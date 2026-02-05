@@ -24,8 +24,6 @@ export default function Footer() {
           <div className="footer-links">
             {[
               { label: "Home", to: "home" },
-              { label: "About Us", to: "about" },
-              { label: "Service", to: "service" },
               { label: "Gallery", to: "gallery" },
               { label: "Contact Us", to: "contact" },
               { label: "Track Order", to: "trackorder" },
