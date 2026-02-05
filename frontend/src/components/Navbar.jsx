@@ -68,12 +68,13 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-6">
             <li>{navItem("Home", "home")}</li>
+             <li>{navItem("Services", "service")}</li>
             <li>{navItem("About", "about")}</li>
-            <li>{navItem("Services", "service")}</li>
-            <li>{navItem("FAQ", "faq")}</li>
             <li>{navItem("Gallery", "gallery")}</li>
             <li>{navItem("Contact", "contact")}</li>
+              <li>{navItem("FAQ", "faq")}</li>
             <li>{navItem("Track Order", "trackorder")}</li>
+           
 
             {/* Login */}
             <li>
