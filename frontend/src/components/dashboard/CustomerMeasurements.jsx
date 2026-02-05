@@ -32,14 +32,19 @@ const CustomerMeasurements = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        if (customerRes.data.success) setCustomer(customerRes.data.customer);
+        if (customerRes.data.success) {
+          setCustomer(customerRes.data.customer);
+        }
 
         const measurementsRes = await axios.get(
           `https://classic-tailor-shop-backend.onrender.com/api/measurements/${id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        if (measurementsRes.data.success && measurementsRes.data.measurements) {
+        if (
+          measurementsRes.data.success &&
+          measurementsRes.data.measurements
+        ) {
           setMeasurements(measurementsRes.data.measurements);
         }
       } catch (err) {
@@ -79,7 +84,8 @@ const CustomerMeasurements = () => {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete these measurements?")) return;
+    if (!window.confirm("Are you sure you want to delete these measurements?"))
+      return;
 
     try {
       const response = await axios.delete(
@@ -109,107 +115,148 @@ const CustomerMeasurements = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="text-lg text-gray-600">Loading...</div>
+      <div className="min-h-screen bg-[#071525] flex items-center justify-center text-slate-400">
+        Loading...
       </div>
     );
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      {/* Header */}
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-blue-600">Customer Measurements</h1>
-        <p className="text-gray-600 mt-1">
-          {customer?.name} | {customer?.phone} | {customer?.address}
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#071525] px-6 py-10 text-slate-200">
+      <div className="max-w-6xl mx-auto space-y-8">
 
-      {/* Action Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-blue-100 p-6 rounded-lg shadow cursor-pointer hover:bg-blue-200">
-          <h2 className="font-semibold text-lg text-blue-700">Edit Measurements</h2>
-          <p className="text-gray-600 mt-1">Update shirt and pant measurements</p>
+        {/* HEADER */}
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-white">
+            Customer Measurements
+          </h1>
+          <p className="text-slate-400 mt-1">
+            {customer?.name} | {customer?.phone} | {customer?.address}
+          </p>
         </div>
-        <div
-          onClick={handleDelete}
-          className="bg-red-100 p-6 rounded-lg shadow cursor-pointer hover:bg-red-200"
-        >
-          <h2 className="font-semibold text-lg text-red-700">Delete Measurements</h2>
-          <p className="text-gray-600 mt-1">Remove all measurements for this customer</p>
-        </div>
-      </div>
 
-      {/* Measurements Form */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Shirt */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Shirt Measurements (in inches)</h2>
-          <div className="space-y-4">
-            {[
-              { label: "Shirt Length", name: "shirtLength" },
-              { label: "Chest", name: "shirtChest" },
-              { label: "Waist", name: "shirtWaist" },
-              { label: "Shoulder", name: "shirtShoulder" },
-              { label: "Sleeve", name: "shirtSleeve" },
-            ].map((field) => (
-              <div key={field.name}>
-                <label className="block text-gray-700 mb-1">{field.label}</label>
-                <input
-                  type="text"
-                  name={field.name}
-                  value={measurements[field.name]}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                  placeholder={`Enter ${field.label.toLowerCase()}`}
-                />
-              </div>
-            ))}
+        {/* ACTION CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[#0b1e34] p-6 rounded-2xl border border-slate-700">
+            <h2 className="font-semibold text-lg text-blue-400">
+              Edit Measurements
+            </h2>
+            <p className="text-slate-400 mt-1">
+              Update shirt and pant measurements
+            </p>
+          </div>
+
+          <div
+            onClick={handleDelete}
+            className="bg-[#0b1e34] p-6 rounded-2xl border border-red-700 cursor-pointer hover:bg-red-900/30 transition"
+          >
+            <h2 className="font-semibold text-lg text-red-400">
+              Delete Measurements
+            </h2>
+            <p className="text-slate-400 mt-1">
+              Remove all measurements for this customer
+            </p>
           </div>
         </div>
 
-        {/* Pant */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-green-600 mb-4">Pant Measurements (in inches)</h2>
-          <div className="space-y-4">
-            {[
-              { label: "Pant Length", name: "pantLength" },
-              { label: "Waist", name: "pantWaist" },
-              { label: "Hip", name: "pantHip" },
-              { label: "Thigh", name: "pantThigh" },
-              { label: "Bottom", name: "pantBottom" },
-            ].map((field) => (
-              <div key={field.name}>
-                <label className="block text-gray-700 mb-1">{field.label}</label>
-                <input
-                  type="text"
-                  name={field.name}
-                  value={measurements[field.name]}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                  placeholder={`Enter ${field.label.toLowerCase()}`}
-                />
-              </div>
-            ))}
+        {/* FORMS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* SHIRT */}
+          <div className="bg-[#0b1e34] p-6 rounded-2xl border border-slate-700">
+            <h2 className="text-xl font-bold text-blue-400 mb-4">
+              Shirt Measurements (in inches)
+            </h2>
+
+            <div className="space-y-4">
+              {[
+                { label: "Shirt Length", name: "shirtLength" },
+                { label: "Chest", name: "shirtChest" },
+                { label: "Waist", name: "shirtWaist" },
+                { label: "Shoulder", name: "shirtShoulder" },
+                { label: "Sleeve", name: "shirtSleeve" },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block text-slate-300 mb-1">
+                    {field.label}
+                  </label>
+                  <input
+                    type="text"
+                    name={field.name}
+                    value={measurements[field.name]}
+                    onChange={handleChange}
+                    className="
+                      w-full px-4 py-2 rounded-xl
+                      bg-[#071525] border border-slate-600
+                      text-slate-200 placeholder-slate-500
+                      focus:ring-2 focus:ring-blue-500 outline-none
+                    "
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* PANT */}
+          <div className="bg-[#0b1e34] p-6 rounded-2xl border border-slate-700">
+            <h2 className="text-xl font-bold text-emerald-400 mb-4">
+              Pant Measurements (in inches)
+            </h2>
+
+            <div className="space-y-4">
+              {[
+                { label: "Pant Length", name: "pantLength" },
+                { label: "Waist", name: "pantWaist" },
+                { label: "Hip", name: "pantHip" },
+                { label: "Thigh", name: "pantThigh" },
+                { label: "Bottom", name: "pantBottom" },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block text-slate-300 mb-1">
+                    {field.label}
+                  </label>
+                  <input
+                    type="text"
+                    name={field.name}
+                    value={measurements[field.name]}
+                    onChange={handleChange}
+                    className="
+                      w-full px-4 py-2 rounded-xl
+                      bg-[#071525] border border-slate-600
+                      text-slate-200 placeholder-slate-500
+                      focus:ring-2 focus:ring-emerald-500 outline-none
+                    "
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Save Button */}
-      <div className="mt-6 flex justify-end space-x-4">
-        <button
-          onClick={() => navigate("/admin-dashboard/customerlist")}
-          className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-50"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={saving}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          {saving ? "Saving..." : "Save Measurements"}
-        </button>
+        {/* ACTION BUTTONS */}
+        <div className="flex justify-end gap-4">
+          <button
+            onClick={() => navigate("/admin-dashboard/customerlist")}
+            className="
+              px-6 py-3 rounded-xl border border-slate-600
+              text-slate-300 hover:bg-slate-700 transition
+            "
+          >
+            Cancel
+          </button>
+
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className="
+              px-8 py-3 rounded-xl
+              bg-blue-600 text-white
+              hover:bg-blue-700 transition
+              disabled:opacity-50
+            "
+          >
+            {saving ? "Saving..." : "Save Measurements"}
+          </button>
+        </div>
       </div>
     </div>
   );

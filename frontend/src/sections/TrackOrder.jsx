@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { HiMiniArrowPath } from "react-icons/hi2";
+import "./TrackOrder.css";
 
 const TrackOrder = () => {
   const [phone, setPhone] = useState("");
-  const [orders, setOrders] = useState([]);   
+  const [orders, setOrders] = useState([]);
   const [message, setMessage] = useState("");
 
   const handleSearch = async () => {
     if (!phone) {
-      setMessage("Please Enter Your Phone Number");
+      setMessage("Please enter your phone number");
       return;
     }
 
@@ -29,93 +30,81 @@ const TrackOrder = () => {
   };
 
   const handleReset = () => {
-  setPhone("");
-  setOrders([]);
-  setMessage("");
-};
+    setPhone("");
+    setOrders([]);
+    setMessage("");
+  };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Track Your Order</h2>
-<div className="flex items-center gap-3 justify-center mb-6">
-  <input
-    type="text"
-    placeholder="Enter Your Phone Number"
-    value={phone}
-    onChange={(e) => setPhone(e.target.value)}
-    className="border px-4 py-2 rounded w-72 focus:outline-none focus:ring-2 focus:ring-blue-500"
-  />
+    <section className="track-section" id="trackorder">
+      <div className="track-container">
 
-  <button
-    onClick={handleSearch}
-   className="
-    text-blue-600 bg-neutral-primary border border-blue-600
-    hover:bg-blue-600 hover:text-white
-    focus:ring-4 focus:ring-blue-200
-    font-medium leading-5 rounded-md text-sm px-4 py-2.5
-    transition
-  "
-     
-  >
-    Track Order
-  </button>
-
-  {/* Refresh Button */}
-  <button
-    onClick={handleReset}
-    className="group relative p-2 rounded-full hover:bg-gray-200 transition"
-  >
-    <HiMiniArrowPath className="h-6 w-6 text-blue-600" />
-
-    <span className="absolute -top-8 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition bg-black text-white text-xs px-2 py-1 rounded">
-      Refresh
-    </span>
-  </button>
-</div>
-
-
-      {/* Message */}
-      {message && <p className="text-center text-red-500">{message}</p>}
-
-      {/* Orders Table */}
-      {orders.length > 0 && (
-        <div className="overflow-x-auto mt-6">
-          <table className="w-full border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border p-2">Name</th>
-                <th className="border p-2">Phone</th>
-                <th className="border p-2">Shirt</th>
-                <th className="border p-2">Pant</th>
-                <th className="border p-2">Delivery Date</th>
-                <th className="border p-2">Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order._id} className="text-center">
-                  <td className="border p-2">
-                    {order.customerId?.name}
-                  </td>
-                  <td className="border p-2">
-                    {order.customerId?.phone}
-                  </td>
-                  <td className="border p-2">{order.shirt || 0}</td>
-                  <td className="border p-2">{order.pant || 0}</td>
-                  <td className="border p-2">
-                    {new Date(order.deliveryDate).toLocaleDateString()}
-                  </td>
-                  <td className="border p-2 font-semibold text-blue-600">
-                    {order.status}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        {/* Header */}
+        <div className="track-header">
+          <span className="track-subtitle">Order Status</span>
+          <h2 className="track-title">Track Your Order</h2>
+          <p className="track-desc">
+            Enter your phone number to view your tailoring order status.
+          </p>
         </div>
-      )}
-    </div>
+
+        {/* Search */}
+        <div className="track-search">
+          <input
+            type="text"
+            placeholder="Enter your phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+
+          <button onClick={handleSearch} className="track-btn">
+            Track Order
+          </button>
+
+          <button onClick={handleReset} className="track-reset">
+            <HiMiniArrowPath />
+            <span>Reset</span>
+          </button>
+        </div>
+
+        {/* Message */}
+        {message && <p className="track-message">{message}</p>}
+
+        {/* Table */}
+        {orders.length > 0 && (
+          <div className="track-table-wrapper">
+            <table className="track-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Shirt</th>
+                  <th>Pant</th>
+                  <th>Delivery Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>{order.customerId?.name}</td>
+                    <td>{order.customerId?.phone}</td>
+                    <td>{order.shirt || 0}</td>
+                    <td>{order.pant || 0}</td>
+                    <td>
+                      {new Date(order.deliveryDate).toLocaleDateString()}
+                    </td>
+                    <td className="status">{order.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+      </div>
+    </section>
   );
 };
 

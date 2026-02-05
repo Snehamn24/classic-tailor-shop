@@ -2,11 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
+/* ===== GLOBAL RESET ===== */
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background-color: #EFF6FF;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background: #071525;
+}
+/* Fix scroll offset for fixed navbar */
+section {
+  scroll-margin-top: 96px; /* navbar height */
+}
+
+/* Optional: responsive for mobile if navbar height is smaller */
+@media (max-width: 768px) {
+  section {
+    scroll-margin-top: 72px; /* adjust to mobile navbar height */
+  }
 }

@@ -1,70 +1,64 @@
-import HomeContent from "../sections/HomeContent";
+import Hero from "../sections/Hero";
 import AboutContent from "../sections/AboutContent";
 import ServiceContent from "../sections/ServicesContent";
 import GalleryContent from "../sections/GalleryContent";
 import ContactContent from "../sections/ContactContent";
 import TrackOrder from "../sections/TrackOrder";
 import Footer from "../sections/Footer";
+import FAQ from "../sections/FAQ";
 
-export default function Home()
-{
-    return(
-        <div className="flex flex-col min-h-screen">
+export default function Home() {
+  return (
+    <main id="home" className="w-full overflow-x-hidden">
 
-        <section
-        id="home"
-        className="min-h-screen flex items-center justify-center bg-blue-50"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-screen">
-          <HomeContent />
-        </div>
+      {/* HERO */}
+      <section className="min-h-screen w-full relative">
+        <Hero />
       </section>
 
-         {/* ABOUT */}
-      <section id="about" className="bg-blue-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ABOUT */}
+      <section id="about" className="bg-[#071525]">
+        <div className="max-w-7xl mx-auto px-4 py-12">
           <AboutContent />
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="service" className="bg-blue-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="service" className="bg-[#071525]">
+        <div className="max-w-7xl mx-auto px-4 py-12">
           <ServiceContent />
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="bg-[#071525]">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <FAQ />
+        </div>
+      </section>
+
       {/* GALLERY */}
-      <section id="gallery" className="bg-blue-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="gallery" className="bg-[#071525]">
+        <div className="max-w-7xl mx-auto px-4 py-12">
           <GalleryContent />
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="bg-blue-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="bg-[#071525]">
+        <div className="max-w-7xl mx-auto px-4 py-12">
           <ContactContent />
         </div>
       </section>
 
       {/* TRACK ORDER */}
-      <section id="trackorder" className="bg-blue-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <TrackOrder />
-        </div>
-      </section>
+      <TrackOrder />  {/* <-- no extra wrapper, TrackOrder handles full width & gradient */}
 
+      {/* FOOTER */}
+      <footer className="bg-[#071525]">
+        <Footer />
+      </footer>
 
-      <section id="footer" className="bg-blue-50">
-       
-        <div className="py-16 pb-0">
-          <Footer />
-        </div>
-      </section>
-
-
-
-        </div>
-    )
+    </main>
+  );
 }

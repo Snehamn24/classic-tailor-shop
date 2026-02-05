@@ -27,7 +27,6 @@ export default function AddOrderPage() {
 
   const today = new Date().toISOString().split("T")[0];
 
-
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -65,7 +64,7 @@ export default function AddOrderPage() {
     }
 
     if (order.shirt === 0 && order.pant === 0) {
-      alert("Order must contain at least one item: either a shirt or a pant.");
+      alert("Order must contain at least one item.");
       return;
     }
 
@@ -83,39 +82,33 @@ export default function AddOrderPage() {
       alert("Order created successfully");
       navigate("/admin-dashboard/orders");
     } catch (err) {
-      console.error(err);
-
-      if (err.response && err.response.data && err.response.data.message) {
-        alert(err.response.data.message);
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
+      alert(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 px-6 py-10">
+    <div className="min-h-screen bg-[#071525] px-6 py-10 text-white">
       <div className="max-w-6xl mx-auto">
 
         {/* HEADER */}
         <div className="flex items-center mb-10">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-4 py-2 rounded-xl transition"
+            className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition"
           >
             <FiArrowLeft />
             Back
           </button>
-          <h1 className="flex-1 text-center text-4xl font-bold text-blue-600">
+          <h1 className="flex-1 text-center text-4xl font-bold text-blue-500">
             Add New Order
           </h1>
         </div>
 
         {/* CUSTOMER SEARCH */}
-        <div className="bg-white border border-blue-100 rounded-2xl p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-[#0b223a] border border-white/10 rounded-2xl p-6 mb-8">
+          <h2 className="text-xl font-semibold text-white mb-4">
             Select Customer
           </h2>
 
@@ -125,12 +118,12 @@ export default function AddOrderPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search customers..."
-              className="w-full pl-12 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-200"
+              className="w-full pl-12 pr-4 py-3 rounded-xl bg-[#071525] text-white border border-white/10 focus:ring-2 focus:ring-blue-500/40 outline-none"
             />
           </div>
 
           {fetchingCustomers ? (
-            <p className="text-gray-500">Loading customers...</p>
+            <p className="text-gray-400">Loading customers...</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-80 overflow-y-auto">
               {filteredCustomers.map((c) => (
@@ -140,28 +133,23 @@ export default function AddOrderPage() {
                   className={`cursor-pointer rounded-2xl border p-5 transition-all duration-300
                     ${
                       selectedCustomer?._id === c._id
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-blue-100 bg-white hover:border-blue-400 hover:bg-blue-50 hover:-translate-y-1 hover:shadow-md"
+                        ? "border-blue-500 bg-blue-600/20"
+                        : "border-white/10 bg-[#071525] hover:border-blue-400 hover:bg-blue-600/10 hover:-translate-y-1"
                     }`}
                 >
-                  <div className="flex justify-between">
-                    <div className="flex gap-4">
-                      <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
-                        <FiUser className="text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-blue-600">
-                          {c.name}
-                        </h3>
-                        <p className="text-sm text-gray-600">{c.phone}</p>
-                        <p className="text-xs text-gray-400 truncate">
-                          {c.address}
-                        </p>
-                      </div>
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                      <FiUser className="text-white" />
                     </div>
-                    <span className="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full h-fit">
-                      Select
-                    </span>
+                    <div>
+                      <h3 className="font-semibold text-blue-400">
+                        {c.name}
+                      </h3>
+                      <p className="text-sm text-gray-400">{c.phone}</p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {c.address}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -169,119 +157,115 @@ export default function AddOrderPage() {
           )}
         </div>
 
-       {/* ORDER DETAILS */}
-{selectedCustomer && (
-  <div className="bg-white border border-blue-100 rounded-2xl p-6 mt-10">
-    
-    {/* HEADER */}
-    <div className="flex justify-between items-center mb-8">
-      <h2 className="text-xl font-semibold text-gray-800">
-        Order Details
-        <span className="text-blue-600 font-medium">
-          {" "}— {selectedCustomer.name}
-        </span>
-      </h2>
+        {/* ORDER DETAILS */}
+        {selectedCustomer && (
+          <div className="bg-[#0b223a] border border-white/10 rounded-2xl p-6 mt-10">
 
-      <button
-        onClick={() => setSelectedCustomer(null)}
-        className="border border-blue-300 text-blue-600 px-4 py-2 rounded-xl hover:bg-blue-50 transition"
-      >
-        Change Customer
-      </button>
-    </div>
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-xl font-semibold">
+                Order Details —
+                <span className="text-blue-400"> {selectedCustomer.name}</span>
+              </h2>
 
-    {/* ITEMS */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      {["shirt", "pant"].map((item) => (
-        <div
-          key={item}
-          className="flex justify-between items-center border border-blue-100 rounded-xl px-6 py-5"
-        >
-          <div>
-            <p className="text-lg font-semibold capitalize">{item}</p>
-            <p className="text-sm text-gray-500">Quantity</p>
+              <button
+                onClick={() => setSelectedCustomer(null)}
+                className="border border-blue-400 text-blue-400 px-4 py-2 rounded-xl hover:bg-blue-500/10 transition"
+              >
+                Change Customer
+              </button>
+            </div>
+
+            {/* ITEMS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {["shirt", "pant"].map((item) => (
+                <div
+                  key={item}
+                  className="flex justify-between items-center border border-white/10 rounded-xl px-6 py-5"
+                >
+                  <div>
+                    <p className="text-lg font-semibold capitalize">{item}</p>
+                    <p className="text-sm text-gray-400">Quantity</p>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => updateQty(item, "dec")}
+                      className="w-9 h-9 rounded-lg border border-white/10 hover:bg-white/10 flex items-center justify-center"
+                    >
+                      <FiMinus />
+                    </button>
+
+                    <span className="text-xl font-bold w-6 text-center">
+                      {order[item]}
+                    </span>
+
+                    <button
+                      onClick={() => updateQty(item, "inc")}
+                      className="w-9 h-9 rounded-lg bg-blue-600 hover:bg-blue-700 flex items-center justify-center"
+                    >
+                      <FiPlus />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* DATE & STATUS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">
+                  Delivery Date
+                </label>
+                <input
+                  type="date"
+                  min={today}
+                  value={order.deliveryDate}
+                  onChange={(e) =>
+                    setOrder({ ...order, deliveryDate: e.target.value })
+                  }
+                  className="w-full rounded-xl px-4 py-3 bg-[#071525] text-white border border-white/10 focus:ring-2 focus:ring-blue-500/40 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">
+                  Order Status
+                </label>
+                <select
+                  value={order.status}
+                  onChange={(e) =>
+                    setOrder({ ...order, status: e.target.value })
+                  }
+                  className="w-full rounded-xl px-4 py-3 bg-[#071525] text-white border border-white/10 focus:ring-2 focus:ring-blue-500/40 outline-none"
+                >
+                  <option>Not Stitched</option>
+                  <option>In Progress</option>
+                  <option>Stitched</option>
+                  <option>Delivered</option>
+                </select>
+              </div>
+            </div>
+
+            {/* ACTIONS */}
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={() => setSelectedCustomer(null)}
+                className="border border-white/20 px-6 py-3 rounded-xl hover:bg-white/10"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={handleSubmit}
+                disabled={loading}
+                className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl transition"
+              >
+                {loading ? "Creating..." : "Create Order"}
+              </button>
+            </div>
           </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => updateQty(item, "dec")}
-              className="w-9 h-9 rounded-lg border flex items-center justify-center hover:bg-gray-100"
-            >
-              <FiMinus />
-            </button>
-
-            <span className="text-xl font-bold w-6 text-center">
-              {order[item]}
-            </span>
-
-            <button
-              onClick={() => updateQty(item, "inc")}
-              className="w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700"
-            >
-              <FiPlus />
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* DATE & STATUS */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div>
-        <label className="block text-sm font-medium text-gray-600 mb-2">
-          Delivery Date
-        </label>
-        <input
-          type="date"
-          min={today}
-          value={order.deliveryDate}
-          onChange={(e) =>
-            setOrder({ ...order, deliveryDate: e.target.value })
-          }
-          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-200 outline-none"
-        />
+        )}
       </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-600 mb-2">
-          Order Status
-        </label>
-        <select
-          value={order.status}
-          onChange={(e) =>
-            setOrder({ ...order, status: e.target.value })
-          }
-          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-200 outline-none"
-        >
-          <option>Not Stitched</option>
-          <option>In Progress</option>
-          <option>Stitched</option>
-          <option>Delivered</option>
-        </select>
-      </div>
-    </div>
-
-    {/* ACTIONS */}
-    <div className="flex justify-end gap-4">
-      <button
-        onClick={() => setSelectedCustomer(null)}
-        className="border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-100"
-      >
-        Cancel
-      </button>
-
-      <button
-        onClick={handleSubmit}
-        disabled={loading}
-        className="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition"
-      >
-        {loading ? "Creating..." : "Create Order"}
-      </button>
-    </div>
-  </div>
-  
-)}
-</div>
     </div>
   );
 }

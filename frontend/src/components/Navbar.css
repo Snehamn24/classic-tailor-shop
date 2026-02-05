@@ -1,0 +1,21 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(36, 56, 80, 0.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.brand-title {
+  color: #60a5fa;
+}
+
+.brand-tagline {
+  color: #9ca3af;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+}

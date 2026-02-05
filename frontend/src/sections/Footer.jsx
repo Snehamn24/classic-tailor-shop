@@ -1,90 +1,76 @@
+import "./Footer.css";
 import { Link as ScrollLink } from "react-scroll";
 import { RiInstagramFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 
-export default function Footer()
-{
-    return(
-        <footer className="bg-blue-800 text-white py-48 w-full">
-            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-                <p className="text-sm mb-4 md:mb-0">
-                &copy; Classic Tailor Shop. All rights reserved.
-        </p>
+export default function Footer() {
+  return (
+    <footer className="footer-section">
+      <div className="footer-container">
 
-        <div className="flex gap-4">
-            <ScrollLink 
-            to="home"
-            smooth={true}
-            duration={300}
-            className="cursor-pointer hover:text-orange-500"
-            >Home</ScrollLink>
-
-
-            <ScrollLink
-            to="about"
-            smooth={true}
-            duration={300}
-            className="cursor-pointer hover:text-orange-500">About Us</ScrollLink>
-
-            <ScrollLink 
-            to="service"
-            smooth={true}
-            duration={300}
-            className="cursor-pointer hover:text-orange-500"
-            >Service</ScrollLink>
-
-            <ScrollLink 
-            to="gallery"
-            smooth={true}
-            duration={300}
-            className="cursor-pointer hover:text-orange-500"
-            >Gallery</ScrollLink>
-
-
-            <ScrollLink 
-            to="contact"
-            smooth={true}
-            duration={300}
-            className="cursor-pointer hover:text-orange-500"
-            >Contact Us</ScrollLink>
-
-
-
-            <ScrollLink 
-            to="trackorder"
-            smooth={true}
-            duration={300}
-            className="cursor-pointer hover:text-orange-500"
-            >Track Order</ScrollLink>
-
-
-
+        {/* Column 1 – About */}
+        <div className="footer-about">
+          <h3>Classic Tailor</h3>
+          <p>
+            Serving premium tailoring for over 20 years. We specialize in
+            custom-made shirts and pants with precision, comfort, and elegance.
+          </p>
         </div>
 
-             <div className="flex gap-4 text-xl mt-4 md:mt-0">
-          {/* Instagram */}
-          <a
-            href="https://www.instagram.com/classic_mens_tailoring"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-orange-500"
-          >
-           <RiInstagramFill size={28} /> 
-          </a>
+        {/* Column 2 – Navigation (ALL SCROLLING TOGETHER) */}
+        <div className="footer-nav">
+          <h3>Quick Links</h3>
 
-          {/* Gmail */}
-          <a
-            href="https://mail.google.com/mail/?view=cm&to=nagarajn2166@gmail.com"
-            className="hover:text-orange-500"
-          >
-         
-            <MdEmail size={28} />
-          </a>
+          <div className="footer-links">
+            {[
+              { label: "Home", to: "home" },
+              { label: "About Us", to: "about" },
+              { label: "Service", to: "service" },
+              { label: "Gallery", to: "gallery" },
+              { label: "Contact Us", to: "contact" },
+              { label: "Track Order", to: "trackorder" },
+            ].map((item) => (
+              <ScrollLink
+                key={item.to}
+                to={item.to}
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className="footer-link"
+              >
+                {item.label}
+              </ScrollLink>
+            ))}
+          </div>
         </div>
 
+        {/* Column 3 – Contact */}
+        <div className="footer-contact">
+          <h3>Contact</h3>
+          <p>📞 +91 77951 96984</p>
+          <p>✉️ nagarajn2166@gmail.com</p>
+          <p>📍 NG Halli Nagasandra Post, Bengaluru, Karnataka</p>
 
+          <div className="footer-social">
+            <a
+              href="https://www.instagram.com/classic_mens_tailoring"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <RiInstagramFill />
+            </a>
+            <a href="mailto:nagarajn2166@gmail.com">
+              <MdEmail />
+            </a>
+          </div>
+        </div>
 
-            </div>
-        </footer>
-    )
+      </div>
+
+      {/* Bottom */}
+      <div className="footer-bottom">
+        © {new Date().getFullYear()} Classic Tailor. All rights reserved.
+      </div>
+    </footer>
+  );
 }

@@ -24,7 +24,8 @@ const AddCustomer = () => {
     const newErrors = {};
     if (!customer.name.trim()) newErrors.name = "Name is required";
     if (!customer.phone.trim()) newErrors.phone = "Phone is required";
-    else if (!/^[6-9]\d{9}$/.test(customer.phone)) newErrors.phone = "Enter valid 10-digit phone";
+    else if (!/^[6-9]\d{9}$/.test(customer.phone))
+      newErrors.phone = "Enter valid 10-digit phone";
     if (!customer.address.trim()) newErrors.address = "Address is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -36,7 +37,9 @@ const AddCustomer = () => {
 
     setLoading(true);
     try {
-      const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+      const token =
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+
       const response = await axios.post(
         "https://classic-tailor-shop-backend.onrender.com/api/customer/add",
         customer,
@@ -55,34 +58,34 @@ const AddCustomer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F1F7FF] py-10 px-4">
+    <div className="min-h-screen bg-[#071525] py-10 px-4 text-white">
       <div className="max-w-2xl mx-auto">
 
         {/* HEADER */}
         <div className="flex items-center mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-1 text-slate-600 hover:text-blue-600 transition"
+            className="flex items-center gap-1 text-gray-300 hover:text-blue-400 transition"
           >
             <FiArrowLeft />
             Back
           </button>
         </div>
 
-        <h1 className="text-3xl font-bold text-blue-600 mb-1">
+        <h1 className="text-3xl font-bold text-blue-500 mb-1">
           Add New Customer
         </h1>
-        <p className="text-slate-500 mb-8">
+        <p className="text-gray-400 mb-8">
           Enter customer details below
         </p>
 
         {/* FORM CARD */}
-        <div className="bg-white rounded-2xl p-6 shadow-md border border-blue-100">
+        <div className="bg-[#0b223a] rounded-2xl p-6 shadow-lg border border-white/10">
           <form onSubmit={handleSubmit} className="space-y-6">
 
             {/* NAME */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Full Name
               </label>
               <input
@@ -90,19 +93,21 @@ const AddCustomer = () => {
                 name="name"
                 value={customer.name}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                className={`w-full px-4 py-3 rounded-xl bg-[#071525] text-white border focus:outline-none focus:ring-2 ${
                   errors.name
-                    ? "border-red-400 focus:ring-red-300"
-                    : "border-slate-200 focus:ring-blue-300"
+                    ? "border-red-400 focus:ring-red-400/40"
+                    : "border-white/10 focus:ring-blue-500/40"
                 }`}
                 placeholder="Enter full name"
               />
-              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+              {errors.name && (
+                <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
 
             {/* PHONE */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Phone Number
               </label>
               <input
@@ -110,19 +115,21 @@ const AddCustomer = () => {
                 name="phone"
                 value={customer.phone}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                className={`w-full px-4 py-3 rounded-xl bg-[#071525] text-white border focus:outline-none focus:ring-2 ${
                   errors.phone
-                    ? "border-red-400 focus:ring-red-300"
-                    : "border-slate-200 focus:ring-blue-300"
+                    ? "border-red-400 focus:ring-red-400/40"
+                    : "border-white/10 focus:ring-blue-500/40"
                 }`}
                 placeholder="10-digit phone number"
               />
-              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+              )}
             </div>
 
             {/* ADDRESS */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Address
               </label>
               <input
@@ -130,37 +137,39 @@ const AddCustomer = () => {
                 name="address"
                 value={customer.address}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                className={`w-full px-4 py-3 rounded-xl bg-[#071525] text-white border focus:outline-none focus:ring-2 ${
                   errors.address
-                    ? "border-red-400 focus:ring-red-300"
-                    : "border-slate-200 focus:ring-blue-300"
+                    ? "border-red-400 focus:ring-red-400/40"
+                    : "border-white/10 focus:ring-blue-500/40"
                 }`}
                 placeholder="Enter address"
               />
-              {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+              {errors.address && (
+                <p className="text-red-400 text-xs mt-1">{errors.address}</p>
+              )}
             </div>
 
             {/* BUTTON */}
-           <button
-  type="submit"
-  disabled={loading}
-  className="
-    w-full
-    border-2 border-blue-600
-    text-blue-600
-    font-semibold
-    py-3
-    rounded-xl
-    flex items-center justify-center gap-2
-    transition-all duration-300
-    hover:bg-blue-600 hover:text-white
-    active:scale-[0.97]
-    disabled:opacity-50 disabled:cursor-not-allowed
-  "
->
-  <FiUserPlus className="w-5 h-5" />
-  {loading ? "Saving..." : "Add Customer"}
-</button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+                w-full
+                bg-blue-600
+                hover:bg-blue-700
+                text-white
+                font-semibold
+                py-3
+                rounded-xl
+                flex items-center justify-center gap-2
+                transition-all duration-300
+                active:scale-[0.97]
+                disabled:opacity-50 disabled:cursor-not-allowed
+              "
+            >
+              <FiUserPlus className="w-5 h-5" />
+              {loading ? "Saving..." : "Add Customer"}
+            </button>
 
           </form>
         </div>

@@ -1,67 +1,56 @@
-import shop_icon from "../assets/shop.png";
-import man_icon from "../assets/man_icon.png";
-import woman_icon from "../assets/woman_icon.png";
+import "./AboutContent.css";
 
-export default function ServiceContent() {
+export default function AboutContent() {
   return (
-    <div className="bg-blue-50 py-15">
-      <div className="text-center max-w-6xl mx-auto px-4">
-        
-        
-        <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-4">
-          About Us
-        </h2>
-        <p className="text-gray-600 mb-14 max-w-xl mx-auto">
-          20 years of craftsmanship in N.G. Halli — where tradition meets perfect fit.
-        </p>
+    <section className="about-hero" id="about">
+      <div className="about-container">
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          
-          {/* Card */}
-          <ServiceCard
-            icon={shop_icon}
-            title="Our Legacy"
-            desc=" Serving customers in N.G. Halli for over 20 years with precision tailoring."
-          />
+        {/* HEADING */}
+        <div className="about-header">
+          <h2>About Classic Tailor</h2>
+          <p>
+            Serving NG Halli with craftsmanship, trust, and perfect fits for over
+            three decades.
+          </p>
+        </div>
 
-          <ServiceCard
-            icon={man_icon}
-            title="Nagaraj N"
-            desc=" Expert in shirts and pants stitching with flawless finishing and having 30+ years of experience."
-          />
+        {/* CONTENT */}
+        <div className="about-cards">
 
-          <ServiceCard
-            icon={woman_icon}
-            title="Latha"
-            desc=" Specialist in shirt tailoring and having 15+ years of experience"
-          />
+          {/* NAGARAJ */}
+          <div className="about-card">
+            <h3>Nagaraj</h3>
+            <span className="experience">30+ Years of Experience</span>
+            <p>
+              Nagaraj is a master tailor specializing in pant stitching and
+              precision fitting. With over 30 years of hands-on experience, his
+              work is known for durability, comfort, and a flawless finish.
+            </p>
+          </div>
+
+          {/* LATHA */}
+          <div className="about-card">
+            <h3>Latha</h3>
+            <span className="experience">15+ Years of Experience</span>
+            <p>
+              Latha is an expert in shirt stitching, known for elegant cuts and
+              perfect measurements. With 15 years of experience, she ensures
+              every shirt reflects comfort and refined style.
+            </p>
+          </div>
 
         </div>
-      </div>
-    </div>
-  );
-}
 
-/* Reusable Card Component */
-function ServiceCard({ icon, title, desc }) {
-  return (
-    <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 group">
-      
-      {/* Icon */}
-      <div className="flex justify-center mb-6">
-        <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition">
-          <img src={icon} className="w-20 h-20" alt={title} />
+        {/* FOOTER TEXT */}
+        <div className="about-footer">
+          <p>
+            Classic Tailor has proudly served customers in <strong>NG Halli</strong> for
+            nearly <strong>30 years</strong>, building long-term relationships through
+            quality craftsmanship and personalized service.
+          </p>
         </div>
-      </div>
 
-      {/* Content */}
-      <h3 className="text-xl font-semibold text-gray-800 mb-3">
-        {title}
-      </h3>
-      <p className="text-gray-600 text-sm leading-relaxed">
-        {desc}
-      </p>
-    </div>
+      </div>
+    </section>
   );
 }

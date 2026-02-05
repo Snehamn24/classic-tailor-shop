@@ -41,7 +41,6 @@ const Login = () => {
         }
 
         setError(null);
-        alert('Login successful! Redirecting...');
         navigate('/admin-dashboard', { replace: true });
       } else {
         setError(response?.data?.message || 'Login failed');
@@ -60,42 +59,42 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex">
-
-     
+    <div className="min-h-screen bg-[#071525] flex text-white">
+      
       <Navbar />
 
-     
       <div className="flex-grow flex items-center justify-center pt-20">
-        <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
+        <div className="bg-[#0b223a] w-full max-w-md rounded-2xl shadow-2xl p-8 border border-white/10">
           
-        
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
-            Welcome Back 👋
+          <h2 className="text-3xl font-bold text-center mb-2">
+            Welcome Back
           </h2>
-          <p className="text-center text-gray-500 mb-6">
+
+          <p className="text-center text-gray-300 mb-6">
             Login to access your dashboard
           </p>
 
           {/* Error Message */}
           {error && (
-            <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2">
+            <div className="mb-4 text-sm text-red-300 bg-red-900/30 border border-red-700 rounded-lg px-4 py-2">
               {error}
             </div>
           )}
 
-          
           <form onSubmit={handleSubmit} className="space-y-5">
             
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Email Address
               </label>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                className="w-full rounded-lg bg-[#071525] border border-white/20
+                           px-4 py-2 text-white placeholder-gray-400
+                           focus:outline-none focus:ring-2 focus:ring-blue-500
+                           focus:border-blue-500 transition"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -104,13 +103,16 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Password
               </label>
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                className="w-full rounded-lg bg-[#071525] border border-white/20
+                           px-4 py-2 text-white placeholder-gray-400
+                           focus:outline-none focus:ring-2 focus:ring-blue-500
+                           focus:border-blue-500 transition"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -119,7 +121,7 @@ const Login = () => {
 
             {/* Remember Me */}
             <div className="flex items-center justify-between">
-              <label className="flex items-center text-sm text-gray-600">
+              <label className="flex items-center text-sm text-gray-300">
                 <input
                   type="checkbox"
                   className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
@@ -134,13 +136,15 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition duration-200 shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 hover:bg-blue-700
+                         text-white font-semibold py-2.5 rounded-lg
+                         transition duration-200 shadow-md
+                         disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
 
-          
         </div>
       </div>
     </div>
