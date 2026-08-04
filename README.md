@@ -23,7 +23,7 @@ A full-stack web application for **Classic Tailor**, a men's tailoring business 
 | Frontend  | React 18, React Router, Tailwind CSS, Axios, Framer Motion |
 | Backend   | Node.js, Express 5, MongoDB (Mongoose) |
 | Auth      | JWT, bcrypt |
-| Deployment| Backend hosted on [Render](https://render.com) |
+| Deployment| Backend hosted on [Render](https://classic-tailor-shop-front.onrender.com/) |
 
 ## Project structure
 
